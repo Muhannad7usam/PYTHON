@@ -1,9 +1,8 @@
-
 # War Card Game 🃏
 
 A Python implementation of the classic War card game with console interface.
 
-![Game Screenshot](IMAGES/War Car Game.png)
+![Game Screenshot](IMAGES/War_Card_Game.png)
 
 ## Features
 
