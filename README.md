@@ -17,5 +17,4 @@ A versatile Python project demonstrating GUI development, API integration, data 
 - Core packages:
   ```text
   requests>=2.25.1
-  pandas>=1.3.0
-  numpy>=1.21.0
+ 
