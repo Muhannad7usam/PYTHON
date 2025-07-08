@@ -1,8 +1,7 @@
 
 # 🐍 Python Snake Game
 
-![Snake Game](IMAGES/snake_g
-ame.png)
+![Snake Game](IMAGES/snake_game.png)
 
 A complete implementation of the classic **Snake Game** using Python's Turtle graphics module.
 
