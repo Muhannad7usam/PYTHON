@@ -1,26 +1,55 @@
-# War Card Game 🃏
+# 🃏 War Card Game
 
-A Python implementation of the classic War card game with console interface.
+Welcome to the **Ultimate War Card Game** — a terminal-based Python implementation of the classic two-player card game **War**, where you battle the computer round by round with a shuffled deck!
 
-![Game Screenshot](https://via.placeholder.com/600x400?text=War+Card+Game+Screenshot)
+![Game Preview](images/game-preview.png)
 
-## Features
+---
 
-- Complete implementation of War card game rules
-- Proper handling of war scenarios
-- Score tracking
-- Clean console interface
-- Modular code structure
+## 🎮 Game Features
 
-## Requirements
+- Full 52-card deck with suits and ranks
+- Randomized shuffle each game
+- Automatic war resolution (including multiple wars in a row)
+- User vs. Computer
+- Slow-paced, step-by-step game flow for dramatic effect
 
-- Python 3.6+
+---
 
-## Installation
+## 📂 Project Structure
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/war-card-game.git
-cd war-card-game
 ```
+war-card-game/
+├── card.py         # Card class (suit, rank, comparison logic)
+├── deck.py         # Deck class (create, shuffle, deal)
+├── player.py       # Player class (hand of cards)
+├── wargame.py      # Game engine (rounds, war logic, win/lose)
+├── main.py         # Entry point to run the game
+└── .gitignore
+```
+
+---
+
+## 🚀 Getting Started
+
+### ✅ Requirements
+- Python 3.7+
+
+### ▶️ Run the Game
+```bash
+python main.py
+```
+Then follow the prompts in the terminal.
+
+---
+
+## 🖼️ Screenshot
+
+> Here's how the game looks in your terminal:
+
+![Screenshot](images/game-preview.png)
+
+---
+
+## 🙌 Credits
+Created with ♥ by MUHANNAD HUSAM
