@@ -1,6 +1,6 @@
 # 🐍 Python Multi-Paradigm Project
 
-![Python Banner](https://www.python.org/static/community_logos/python-logo-master-v3-TM.png)
+![Python Banner](Python.webp)
 
 A versatile Python project demonstrating GUI development, API integration, data processing, and CLI implementation.
 
