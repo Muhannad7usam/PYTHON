@@ -3,6 +3,7 @@
 
 A modern twist on the classic Pong arcade game, built using Python and the Turtle graphics library. This game provides a fun two-player challenge with fluid controls and increasing difficulty as the ball accelerates with every paddle hit.
 
+![Ping Pong Game](IMAGES/ping_pong_game.webp)
 ---
 
 ## 🎮 Features
