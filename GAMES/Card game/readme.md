@@ -1,9 +1,8 @@
 # 🃏 War Card Game
 
-Welcome to the **Ultimate War Card Game** — a terminal-based Python implementation of the classic two-player card game **War**, where you battle the computer round by round with a shuffled deck!
-
 ![Game Preview](https://raw.githubusercontent.com/your-username/your-repo/main/images/game-preview.png)
 
+A terminal-based Python card game where you go to WAR with the computer, round by round, in an exciting battle of luck and strategy.
 
 ---
 
@@ -44,13 +43,5 @@ Then follow the prompts in the terminal.
 
 ---
 
-## 🖼️ Screenshot
-
-> Here's how the game looks in your terminal:
-
-![Screenshot](images/game-preview.png)
-
----
-
 ## 🙌 Credits
-Created with ♥ by MUHANNAD HUSAM
+Created with ♥ by Muhannad Husam
