@@ -1,6 +1,6 @@
 # 🐍 Python Snake Game
 
-![Snake Game](IMAGES/Snake_Game.png)
+![Snake Game](IMAGES/Snake Game.png)
 
 A complete implementation of the classic **Snake Game** using Python's Turtle graphics module.
 
@@ -22,14 +22,12 @@ A complete implementation of the classic **Snake Game** using Python's Turtle gr
 
 ## ✨ Features
 
-✅ Smooth 4-directional snake movement  
-✅ Randomly generated food items  
-✅ Real-time scoring system with high score persistence  
-✅ Collision detection for:  
-   - Walls  
-   - Snake's own body  
-   - Food  
-✅ High score saved between sessions  
+✅ Smooth 4-directional snake movement✅ Randomly generated food items✅ Real-time scoring system with high score persistence✅ Collision detection for:
+
+- Walls
+- Snake's own body
+- Food
+  ✅ High score saved between sessions
 
 ---
 
@@ -51,3 +49,4 @@ cd PYTHON/Snake-Game/
 
 # Run the game
 python main.py
+```
