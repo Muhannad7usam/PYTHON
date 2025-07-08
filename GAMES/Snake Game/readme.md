@@ -1,7 +1,7 @@
 
 # 🐍 Python Snake Game
 
-![Snake Game](https://w0.peakpx.com/wallpaper/90/456/HD-wallpaper-buy-snake-pass-snake-game.jpg)
+![Snake Game](IMAGES/Snake Game.png)
 
 A complete implementation of the classic **Snake Game** using Python's Turtle graphics module.
 
