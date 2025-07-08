@@ -1,7 +1,6 @@
 # 🃏 War Card Game
 
-![Game Preview](https://i.imgur.com/yourImageCode.png)
-
+![Game Preview](https://tse1.mm.bing.net/th/id/OIP.ob_tfBcBf63kZkX-9bA-vAHaEy?w=850&h=550&rs=1&pid=ImgDetMain)
 
 A terminal-based Python card game where you go to WAR with the computer, round by round, in an exciting battle of luck and strategy.
 
