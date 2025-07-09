@@ -1,7 +1,0 @@
-**.gitignore:**
-1. Standard Python exclusions
-2. Virtual environment folders
-3. IDE-specific files
-4. System files
-5. Test and build artifacts
-6. Project-specific ignores
