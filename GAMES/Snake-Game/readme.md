@@ -34,7 +34,7 @@ A complete implementation of the classic **Snake Game** using Python's Turtle gr
 
 ## How to Play  
 - Use **arrow keys (↑, ↓, ←, →)** to control the snake's direction.  
-- Eat the **red food** to grow longer and increase your score.  
+- Eat the **white food** to grow longer and increase your score.  
 - Avoid hitting the walls or yourself—game over if you collide!  
 
 ---
