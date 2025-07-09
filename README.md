@@ -5,7 +5,7 @@
 A versatile Python project demonstrating GUI development, API integration, data processing, and CLI implementation.
 
 ## Features
-- **GUI Development** (Tkinter/PyQt)
+- **GUI Development** (Tkinter)
 - **REST API Integration** (requests/Flask)
 - **Data Processing** (Pandas/NumPy)
 - **CLI Interface** (argparse/Click)
