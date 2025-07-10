@@ -1,5 +1,0 @@
-# No external dependencies required
-# Python built-in modules used:
-# - turtle
-# - random
-# - time
