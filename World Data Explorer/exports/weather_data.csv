@@ -1,0 +1,4 @@
+display_name,lat,lon,temperature_celsius_raw,humidity,weather_description
+Cairo,30.0444,31.2357,23.33,43,broken clouds
+Riyadh,13.6446,12.4566,29.47,13,few clouds
+Location 3,13.6446,12.4566,29.47,13,few clouds
