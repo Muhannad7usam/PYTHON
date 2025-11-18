@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compare Countries • World Data Explorer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0078d7, #00c6ff); color:#333; min-height:100vh; padding-top:70px; padding-bottom:5rem; }
+    header { color:#fff; text-align:center; margin-bottom:2rem; }
+    .comparison-card { background:#fff; border-radius:10px; padding:2rem; box-shadow:0 4px 10px rgba(0,0,0,.1); margin-bottom:2rem; }
+    .comparison-table img { width:120px; height:80px; object-fit:contain; border-radius:5px; border:1px solid #ddd; }
+    .comparison-table th, .comparison-table td { vertical-align:middle; text-align:center; padding:.75rem; }
+    .comparison-table thead th:first-child, .comparison-table tbody th { text-align:left; font-weight:600; width:15%; }
+    .charts-section { margin-top:3rem; margin-bottom:1rem; }
+    .chart-container { background:#fff; border-radius:10px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,.1); margin-bottom:1.5rem; display:flex; flex-direction:column; align-items:center; min-height:400px; }
+    .chart-container h3 { font-size:1.5rem; color:#007bff; margin-bottom:1.5rem; font-weight:600; text-align:center; width:100%; }
+    .chart-container img { max-width:100%; height:auto; display:block; object-fit:contain; }
+    .chart-placeholder { background:#f0f2f5; border:2px dashed #ced4da; border-radius:10px; padding:2rem; text-align:center; color:#6c757d; font-style:italic; min-height:400px; display:flex; align-items:center; justify-content:center; flex-direction:column; margin-bottom:1.5rem; }
+    .fade-in-item { opacity:0; transform:translateY(10px) scale(.98); animation:fadeInScale .6s ease-out forwards; }
+    @keyframes fadeInScale { to { opacity:1; transform:translateY(0) scale(1); } }
+    .comparison-card { animation-delay:.1s; }
+    .charts-section .col-lg-6:nth-child(1) .fade-in-item { animation-delay:.3s; }
+    .charts-section .col-lg-6:nth-child(2) .fade-in-item { animation-delay:.5s; }
+    .downloads-toolbar { gap:.5rem; }
+    footer { text-align:center; padding:1rem; color:#fff; background:rgba(0,0,0,.2); position:fixed; bottom:0; width:100%; }
+    .footer-author { color:#000; text-decoration:none; font-weight:bold; transition:color .3s; }
+    .footer-author:hover { color:#fff; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">World Data Explorer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a href="/restcountries" class="nav-link active" aria-current="page">Rest Countries</a></li>
+          <li class="nav-item"><a href="/weather" class="nav-link">Weather</a></li>
+          <li class="nav-item"><a href="/exchange" class="nav-link">Exchange</a></li>
+          <li class="nav-item"><a href="/covid" class="nav-link">COVID-19</a></li>
+          <li class="nav-item"><a href="/news" class="nav-link">News</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Compare Countries</h1>
+    <p>Enter up to 4 countries to compare their data side-by-side.</p>
+  </header>
+
+  <div class="container">
+    <form method="POST" action="/restcountries" class="bg-white rounded p-4 shadow-sm mb-4" novalidate>
+      <div class="row g-2">
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="country_name_1" placeholder="Country 1 (e.g. Egypt)" value="{{ request.form.country_name_1 or '' }}" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="country_name_2" placeholder="Country 2 (e.g. France)" value="{{ request.form.country_name_2 or '' }}">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="country_name_3" placeholder="Country 3 (e.g. Japan)" value="{{ request.form.country_name_3 or '' }}">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="country_name_4" placeholder="Country 4 (e.g. Brazil)" value="{{ request.form.country_name_4 or '' }}">
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary px-4">Compare</button>
+      </div>
+    </form>
+
+    {% if countries_list and not population_chart and not area_chart %}
+      {% if countries_list|selectattr('error')|list|length == countries_list|length %}
+        <div class="alert alert-warning text-center">No valid country data found for the names entered.</div>
+      {% endif %}
+    {% endif %}
+
+    {% if countries_list %}
+      <div class="comparison-card mt-4 fade-in-item">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover comparison-table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Feature</th>
+                {% for country in countries_list %}
+                  <th scope="col">
+                    {% if country.error %}
+                      <span class="text-danger">Error</span>
+                    {% else %}
+                      {{ country.name or '—' }}
+                    {% endif %}
+                  </th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Flag</th>
+                {% for country in countries_list %}
+                  <td>
+                    {% if country.flag %}
+                      <img src="{{ country.flag }}" alt="Flag of {{ country.name }}">
+                    {% elif country.error %}
+                      <span class="text-danger small">{{ country.error }}</span>
+                    {% else %}
+                      —
+                    {% endif %}
+                  </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Capital</th>
+                {% for country in countries_list %}
+                  <td>{{ country.capital or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Region</th>
+                {% for country in countries_list %}
+                  <td>{{ country.region or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Subregion</th>
+                {% for country in countries_list %}
+                  <td>{{ country.subregion or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Population</th>
+                {% for country in countries_list %}
+                  <td>{{ country.population_formatted or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Area</th>
+                {% for country in countries_list %}
+                  <td>{{ country.area_formatted or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Languages</th>
+                {% for country in countries_list %}
+                  <td>{{ country.languages or '—' }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">Currencies</th>
+                {% for country in countries_list %}
+                  <td>{{ country.currencies or '—' }}</td>
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="charts-section row">
+        <div class="col-lg-6">
+          {% if population_chart %}
+            <div class="chart-container fade-in-item" role="img" aria-label="Population chart">
+              <h3>Population Visualization</h3>
+              <img src="data:image/png;base64,{{ population_chart }}" alt="Population chart">
+            </div>
+          {% else %}
+            <div class="chart-placeholder fade-in-item"><p>Population chart not available (Data missing or zero).</p></div>
+          {% endif %}
+        </div>
+
+        <div class="col-lg-6">
+          {% if area_chart %}
+            <div class="chart-container fade-in-item" role="img" aria-label="Area chart">
+              <h3>Area Visualization</h3>
+              <img src="data:image/png;base64,{{ area_chart }}" alt="Area chart">
+            </div>
+          {% else %}
+            <div class="chart-placeholder fade-in-item"><p>Area chart not available (Data missing or zero).</p></div>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if download_countries_csv_url %}
+        <div class="d-flex downloads-toolbar justify-content-end my-3">
+          {% if download_countries_csv_url %}
+            <a class="btn btn-outline-secondary" href="{{ download_countries_csv_url }}">Download CSV</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% elif request.method == 'POST' %}
+      <div class="alert alert-warning text-center mt-4">No country data was retrieved. Please check your inputs.</div>
+    {% endif %}
+  </div>
+
+  <footer>
+    &copy; 2025 World Data Explorer — Built by
+    <a href="https://www.linkedin.com/in/muhannadhusam" class="footer-author">MUHANNAD HUSAM</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
