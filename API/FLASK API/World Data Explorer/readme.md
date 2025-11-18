@@ -75,9 +75,7 @@ If pip is not found, use:
 
 bash
 Copy code
-python -m pip install -r requirements.txt
-# or
-python3 -m pip install -r requirements.txt
+python -m pip install -r requirements.txt OR python3 -m pip install -r requirements.txt
 This will install Flask, requests, matplotlib, and all other dependencies.
 
 4. How to Run the Project
