@@ -130,8 +130,6 @@ Exports: CSV (and optional Excel) files written to exports/
 7. Project Structure
 This is the structure of the folder you’ll submit / clone:
 
-text
-Copy code
 World-Data-Explorer/
 │
 ├─ app/
